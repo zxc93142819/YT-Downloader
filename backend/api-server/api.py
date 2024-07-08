@@ -16,7 +16,7 @@ env_port = os.getenv("PORT", 3000)
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://youtubedownload.herokuapp.com:{env_port}"],
+    allow_origins=["https://youtubedownload-8c304a4e20ec.herokuapp.com:{env_port}"],
     allow_credentials=True,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],

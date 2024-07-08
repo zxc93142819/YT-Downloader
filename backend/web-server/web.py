@@ -23,4 +23,4 @@ def index():
 
 if __name__ == '__main__':
     # run_socket_server()
-    app.run(debug=True, host='https://youtubedownload.herokuapp.com', port=env_port)
+    app.run(debug=True, host='https://youtubedownload-8c304a4e20ec.herokuapp.com', port=env_port)

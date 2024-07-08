@@ -32,6 +32,6 @@ async def deal_message(websocket, path):
             except websockets.ConnectionClosed:
                 pass
 
-start_server = websockets.serve(deal_message, "https://youtubedownload.herokuapp.com" , env_port)
+start_server = websockets.serve(deal_message, "https://youtubedownload-8c304a4e20ec.herokuapp.com" , env_port)
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()

@@ -10,7 +10,7 @@ progress = 0
 id = ""
 def sendprogress() :
     # Create WebSocket connection
-    ws_uri = 'ws://youtubedownload.herokuapp.com:8765'
+    ws_uri = 'ws://youtubedownload-8c304a4e20ec.herokuapp.com:8765'
     ws = websocket.WebSocket()
     ws.connect(ws_uri)
     # 发送消息给服务器

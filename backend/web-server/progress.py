@@ -12,6 +12,6 @@ async def run_socket_server() :
                 print(message)
                 progress = int(message)
 
-    start_server = websockets.serve(deal_message, "https://youtubedownload.herokuapp.com" , env_port)
+    start_server = websockets.serve(deal_message, "https://youtubedownload-8c304a4e20ec.herokuapp.com" , env_port)
     asyncio.get_event_loop().run_until_complete(start_server)
     asyncio.get_event_loop().run_forever()
