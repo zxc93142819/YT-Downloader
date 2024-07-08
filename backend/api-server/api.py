@@ -11,11 +11,12 @@ from downloader import downloadVideo
 video_hash = {}
 
 app = FastAPI()
+env_port = os.getenv("PORT", 3000)
 
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://127.0.0.1:5000"],
+    allow_origins=["https://youtubedownload.herokuapp.com:{env_port}"],
     allow_credentials=True,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],

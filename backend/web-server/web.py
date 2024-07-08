@@ -12,7 +12,7 @@ sys.path.append(os.path.join(current_dir, '../api-server'))
 
 
 app = Flask(__name__, template_folder='../../frontend/', static_folder='../../frontend/static/')
- 
+env_port = os.getenv("PORT", 5000)
 
 # 首頁
 @app.route('/')
@@ -23,4 +23,4 @@ def index():
 
 if __name__ == '__main__':
     # run_socket_server()
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='https://youtubedownload.herokuapp.com', port=env_port)
