@@ -1,20 +1,12 @@
+// api_server = "https://youtdownload-899746c157cc.herokuapp.com:8000"
 api_server = "http://127.0.0.1:8000"
 src_type = null; 
 video_id = null;
-id = "" ;
 
-var ws
 
-// 生成獨特id
-function guid() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16 | 0,
-            v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
-}
 
-particlesJS.load('particles-js', 'static/particlesjs-config.json', function() {
+
+particlesJS.load('particles-js', 'frontend/static/particlesjs-config.json', function() {
     console.log('callback - particles.js config loaded');
 });
 
@@ -36,17 +28,8 @@ function changeStyle(clickedButton) {
     });
 }
 
-$(document).ready(function() {
-    // Create WebSocket connection
-    ws = new WebSocket('ws://localhost:8765') 
-    // 在開啟連線時執行
-    ws.addEventListener("open", (event) => {
-        id = guid() ;
-        response_string = "Hello," + id
-        ws.send( response_string );
-        console.log(id) ;
-    });
 
+$(document).ready(function() {    
     document.getElementById('download').addEventListener("change", function() {
         if (this.disabled) {
             this.style.cursor = "not-allowed";
@@ -84,6 +67,8 @@ $(document).ready(function() {
             return;
         }
 
+        downloadReset();
+
         // 禁止按鈕
         $("#btn_submit").prop("disabled", true);
         $("#btn_clear").prop("disabled", true);
@@ -96,22 +81,9 @@ $(document).ready(function() {
             $("#res-msg").val("Processing" + dots);
         }, 500);
 
-        // 監聽 message
-        ws.addEventListener("message", (event) => {
-            console.log("Message from server ", event.data) ;
-            var arr = event.data.split(',')
-            if(arr[1] == id) {
-                if(src_type == "wmv" && parseInt(arr[0]) == 100) {
-                    clearInterval(processInterval)
-                    $("#res-msg").val("Converting to WMV...");
-                    $("#progress-bar").val(99);
-                }
-                else $("#progress-bar").val(parseInt(arr[0]));
-            }
-        });
-
+        // 使用 AJAX 發送 POST 請求
         $.ajax({ 
-            url: `${api_server}/download?url=${encodeURIComponent(url)}&type=${src_type}&id=${id}`,
+            url: `${api_server}/download?url=${encodeURIComponent(url)}&type=${src_type}`,
             type: "GET" 
         }).then(function(data) {
             $("#res-msg").val(data.message);
@@ -119,23 +91,21 @@ $(document).ready(function() {
             $("#download").prop("disabled", false);
             $("#btn_submit").prop("disabled", false);
             $("#btn_clear").prop("disabled", false);
-            if(src_type != "wmv") clearInterval(processInterval);
-            $("#progress-bar").val(100);
+            clearInterval(processInterval);
         }).catch(function(err) {
             $("#res-msg").val(err.responseJSON.message);
             $("#download").prop("disabled", true);
             $("#btn_submit").prop("disabled", false);
             $("#btn_clear").prop("disabled", false);
             clearInterval(processInterval);
-        }) ;
+        });
     });
-
     // 下載按鈕點擊事件
     $("#download").click(function() {
         if ($(this).prop("disabled") || video_id == null) {
             return;
         }
-
+        
         $.ajax({
             url: `${api_server}/video/${video_id}/name`,
             type: "GET",
@@ -181,11 +151,6 @@ $(document).ready(function() {
             });
         }); 
     });
-
-    window.onbeforeunload = function() {
-        // 關閉頁面
-        response_string = "goodbye," + id
-        ws.send( response_string );
-        ws.close() ;
-    };
 });
+  
+ 

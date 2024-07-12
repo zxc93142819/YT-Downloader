@@ -1,11 +1,11 @@
 {
-  "name": "yt-downloader-main",
+  "name": "yt-downloader-33d62166a38ccb54e0abb8816dc87c33a40f38a3",
   "version": "1.0.0",
   "description": "NCKU-SE final project.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./start.sh"
+    "start": "python ./backend/web_server/web.py"
   },
   "keywords": [],
   "author": "",
