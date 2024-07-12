@@ -6,6 +6,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi import FastAPI, Response, Request
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
 
 app = FastAPI()
 
@@ -17,14 +18,14 @@ video_hash = {}
 
 app = FastAPI()
 
-# # CORS middleware
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["http://127.0.0.1:5000"],
-#     allow_credentials=True,
-#     allow_methods=["GET", "POST"],
-#     allow_headers=["*"],
-# )
+# CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:5000"],
+    allow_credentials=True,
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
+)
 
 # 配置靜態文件路由
 app.mount("/frontend/static", StaticFiles(directory="frontend/static"), name="static")
