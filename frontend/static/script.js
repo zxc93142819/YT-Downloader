@@ -1,6 +1,6 @@
 // api_server = "https://youtdownload-899746c157cc.herokuapp.com:8000"
 // const port = process.env.PORT || 8000
-api_server = "http://0.0.0.0:8000"
+api_server = "https://yt-downloader-rkqk.onrender.com:8000"
 src_type = null; 
 video_id = null;
 
