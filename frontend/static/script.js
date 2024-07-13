@@ -1,6 +1,6 @@
 // api_server = "https://youtdownload-899746c157cc.herokuapp.com:8000"
-const port = process.env.PORT || 8000
-api_server = "http://127.0.0.1:" + toString(port)
+// const port = process.env.PORT || 8000
+api_server = "http://0.0.0.0:8000"
 src_type = null; 
 video_id = null;
 
